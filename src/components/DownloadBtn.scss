@@ -1,0 +1,78 @@
+
+@use 'sass:color';
+
+$prime: #adeca8;
+$arrow: #34a853;
+
+@function shadow($color) {
+  $val: 0px 0px $color;
+  @for $i from 1 through 50 {
+    $val: #{$val}, #{$i}px #{$i}px #{$color};
+  }
+  @return $val;
+}
+
+.cloud {
+  width: 100px;
+  height: 40px;
+  position: relative;
+  background: $prime;
+  display: inline-block;
+  border-radius: 50px;
+  margin: 0 auto;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    background: $prime;
+    border-radius: 100%;
+    top: -20px;
+  }
+
+  &::after {
+    width: 60px;
+    height: 60px;
+    left: 5px;
+  }
+
+  &::before {
+    width: 40px;
+    height: 40px;
+    left: 50px;
+  }
+}
+
+.arrow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  top: 10px;
+  width: 15px;
+  height: 10px;
+  background: $arrow;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 100%;
+    border: 15px solid transparent;
+    border-top-color: $arrow;
+  }
+
+  animation: download 1s linear infinite;
+}
+
+@keyframes download {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
